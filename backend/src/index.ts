@@ -35,6 +35,14 @@ app.use(cors());
 // Middleware
 app.use(express.json());
 
+// Suporte explícito a OPTIONS para preflight
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.sendStatus(200);
+});
+
 // Proteger todas as rotas de dados
 app.use('/api/casas', authMiddleware);
 app.use('/api/arbitragens', authMiddleware);
