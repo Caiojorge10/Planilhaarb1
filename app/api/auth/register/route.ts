@@ -7,7 +7,6 @@ export async function POST(request: NextRequest) {
     // Verificar se o backend está online
     const healthCheck = await fetch('https://planilhaarb1.onrender.com/api/health', {
       method: 'GET',
-      timeout: 5000,
     }).catch(() => null);
 
     if (!healthCheck || !healthCheck.ok) {
