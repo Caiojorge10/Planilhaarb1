@@ -77,12 +77,100 @@ app.put('/api/casas/:id', async (req, res) => {
 
 app.delete('/api/casas/:id', async (req, res) => {
   try {
-    await prisma.casa.delete({
-      where: { id: parseInt(req.params.id) }
+    const casaId = parseInt(req.params.id);
+    
+    // Verificar se há movimentações vinculadas
+    const movimentacoes = await prisma.movimentacao.findMany({
+      where: { casaId }
     });
+    
+    if (movimentacoes.length > 0) {
+      return res.status(400).json({ 
+        error: 'Não é possível deletar casa com movimentações vinculadas',
+        details: `Existem ${movimentacoes.length} movimentações vinculadas a esta casa`
+      });
+    }
+    
+    // Verificar se há arbitragens vinculadas
+    const arbitragens = await prisma.arbitragem.findMany({
+      where: {
+        OR: [
+          { casa1Id: casaId },
+          { casa2Id: casaId },
+          { casa3Id: casaId },
+          { casa4Id: casaId },
+          { casa5Id: casaId }
+        ]
+      }
+    });
+    
+    if (arbitragens.length > 0) {
+      return res.status(400).json({ 
+        error: 'Não é possível deletar casa com arbitragens vinculadas',
+        details: `Existem ${arbitragens.length} arbitragens vinculadas a esta casa`
+      });
+    }
+    
+    // Verificar se há freebets vinculadas
+    const freebets = await prisma.freebet.findMany({
+      where: { casaId }
+    });
+    
+    if (freebets.length > 0) {
+      return res.status(400).json({ 
+        error: 'Não é possível deletar casa com freebets vinculadas',
+        details: `Existem ${freebets.length} freebets vinculadas a esta casa`
+      });
+    }
+    
+    // Verificar se há freespins vinculadas
+    const freespins = await prisma.freeSpin.findMany({
+      where: { casaId }
+    });
+    
+    if (freespins.length > 0) {
+      return res.status(400).json({ 
+        error: 'Não é possível deletar casa com freespins vinculadas',
+        details: `Existem ${freespins.length} freespins vinculadas a esta casa`
+      });
+    }
+    
+    // Verificar se há ganhos vinculados
+    const ganhos = await prisma.ganho.findMany({
+      where: { casaId }
+    });
+    
+    if (ganhos.length > 0) {
+      return res.status(400).json({ 
+        error: 'Não é possível deletar casa com ganhos vinculados',
+        details: `Existem ${ganhos.length} ganhos vinculados a esta casa`
+      });
+    }
+    
+    // Verificar se há perdas vinculadas
+    const percas = await prisma.perca.findMany({
+      where: { casaId }
+    });
+    
+    if (percas.length > 0) {
+      return res.status(400).json({ 
+        error: 'Não é possível deletar casa com perdas vinculadas',
+        details: `Existem ${percas.length} perdas vinculadas a esta casa`
+      });
+    }
+    
+    // Se não há dependências, deletar a casa
+    await prisma.casa.delete({
+      where: { id: casaId }
+    });
+    
     res.status(204).send();
   } catch (error) {
-    res.status(500).json({ error: 'Erro ao deletar casa' });
+    console.error('Erro ao deletar casa:', error);
+    res.status(500).json({ 
+      error: 'Erro ao deletar casa', 
+      details: error instanceof Error ? error.message : 'Erro desconhecido' 
+    });
   }
 });
 
