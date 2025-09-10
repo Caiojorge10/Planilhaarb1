@@ -24,6 +24,7 @@ const allowedOrigins = [
   'http://localhost:3001',
   'http://157.245.5.53:3000',
   'http://157.245.5.53:3001',
+  'https://planilhaarb1.vercel.app',
   'https://seudominio.com',
   'https://www.seudominio.com'
 ];
