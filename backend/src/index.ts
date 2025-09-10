@@ -1,5 +1,5 @@
 import express from 'express';
-import cors from 'cors';
+// import cors from 'cors'; // Removido para desabilitar CORS completamente
 import { PrismaClient } from '../generated/prisma';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -29,19 +29,9 @@ const allowedOrigins = [
   'https://www.seudominio.com'
 ];
 
-// CORS desabilitado para sistema interno
-app.use(cors());
-
+// CORS completamente desabilitado para sistema interno
 // Middleware
 app.use(express.json());
-
-// Suporte explícito a OPTIONS para preflight
-app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.sendStatus(200);
-});
 
 // Proteger todas as rotas de dados
 app.use('/api/casas', authMiddleware);
