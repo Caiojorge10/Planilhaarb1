@@ -99,7 +99,7 @@ export default function MovimentacoesPage() {
     async function fetchSaldos() {
       const saldosData = await Promise.all(
         casas.map(async (casa) => {
-          const response = await fetch(`/api/casas/${casa.id}/saldo`, {
+          const response = await fetch(`/api/casas/saldo?casaId=${casa.id}`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           const saldo = await response.json();
