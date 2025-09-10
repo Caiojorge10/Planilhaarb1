@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const url = new URL(request.url);
-    const id = url.pathname.split('/').pop();
+    const { id } = params;
     
     const response = await fetch(`https://planilhaarb1.onrender.com/api/freespins/${id}`, {
       method: 'GET',
@@ -19,11 +18,10 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function PUT(request: NextRequest) {
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const body = await request.json();
-    const url = new URL(request.url);
-    const id = url.pathname.split('/').pop();
+    const { id } = params;
     
     const response = await fetch(`https://planilhaarb1.onrender.com/api/freespins/${id}`, {
       method: 'PUT',
@@ -41,10 +39,9 @@ export async function PUT(request: NextRequest) {
   }
 }
 
-export async function DELETE(request: NextRequest) {
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
   try {
-    const url = new URL(request.url);
-    const id = url.pathname.split('/').pop();
+    const { id } = params;
     
     if (!id || isNaN(Number(id))) {
       return NextResponse.json({ error: 'ID inválido' }, { status: 400 });
