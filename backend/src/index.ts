@@ -29,10 +29,8 @@ const allowedOrigins = [
   'https://www.seudominio.com'
 ];
 
-app.use(cors({
-  origin: true, // Permite todas as origens temporariamente
-  credentials: true
-}));
+// CORS desabilitado para sistema interno
+app.use(cors());
 
 // Middleware
 app.use(express.json());
