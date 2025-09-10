@@ -149,7 +149,7 @@ export const casasAPI = {
   },
 
   async delete(id: number): Promise<void> {
-    const response = await fetch(`${API_BASE_URL}/casas/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/delete?entity=casas&id=${id}`, {
       method: 'DELETE',
       headers: { ...getAuthHeaders() },
     });
@@ -188,7 +188,7 @@ export const arbitragensAPI = {
   },
 
   async delete(id: number): Promise<void> {
-    const response = await fetch(`${API_BASE_URL}/arbitragens/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/delete?entity=arbitragens&id=${id}`, {
       method: 'DELETE',
       headers: { ...getAuthHeaders() },
     });
@@ -227,7 +227,7 @@ export const percasAPI = {
   },
 
   async delete(id: number): Promise<void> {
-    const response = await fetch(`${API_BASE_URL}/percas/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/delete?entity=percas&id=${id}`, {
       method: 'DELETE',
       headers: { ...getAuthHeaders() },
     });
@@ -256,7 +256,7 @@ export const ganhosAPI = {
   },
 
   async delete(id: number): Promise<void> {
-    const response = await fetch(`${API_BASE_URL}/ganhos/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/delete?entity=ganhos&id=${id}`, {
       method: 'DELETE',
       headers: { ...getAuthHeaders() },
     });
@@ -295,7 +295,7 @@ export const freebetsAPI = {
   },
 
   async delete(id: number): Promise<void> {
-    const response = await fetch(`${API_BASE_URL}/freebets/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/delete?entity=freebets&id=${id}`, {
       method: 'DELETE',
       headers: { ...getAuthHeaders() },
     });
@@ -334,7 +334,7 @@ export const freespinsAPI = {
   },
 
   async delete(id: number): Promise<void> {
-    const response = await fetch(`${API_BASE_URL}/freespins/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/delete?entity=freespins&id=${id}`, {
       method: 'DELETE',
       headers: { ...getAuthHeaders() },
     });
@@ -360,7 +360,7 @@ export const movimentacoesAPI = {
     return response.json();
   },
   async delete(id: number): Promise<void> {
-    const response = await fetch(`${API_BASE_URL}/movimentacoes/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/delete?entity=movimentacoes&id=${id}`, {
       method: 'DELETE',
       headers: { ...getAuthHeaders() },
     });
