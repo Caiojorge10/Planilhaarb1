@@ -214,7 +214,7 @@ export default function MovimentacoesPage() {
     : 0;
 
   const totalSaques = Array.isArray(movimentacoes)
-    ? movimentacoes.filter(m => m.tipo === 'saque' || m.tipo === 'aposta' || m.tipo === 'perda').reduce((sum, m) => sum + m.valor, 0)
+    ? movimentacoes.filter(m => m.tipo === 'saque' || m.tipo === 'perda').reduce((sum, m) => sum + m.valor, 0)
     : 0;
 
   const saldoTotal = saldos.reduce((sum, s) => sum + s.saldo, 0)
