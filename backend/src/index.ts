@@ -618,8 +618,8 @@ app.get('/api/casas/:id/saldo', async (req, res) => {
     // Saldo apenas pelas movimentações
     const movimentacoes = await prisma.movimentacao.findMany({ where: { casaId } });
     const saldo = movimentacoes.reduce((acc, mov) => {
-      if (mov.tipo === 'deposito' || mov.tipo === 'ganho') return acc + mov.valor;
-      if (mov.tipo === 'saque' || mov.tipo === 'aposta' || mov.tipo === 'perda' || mov.tipo === 'premio') return acc - mov.valor;
+      if (mov.tipo === 'deposito' || mov.tipo === 'ganho' || mov.tipo === 'premio') return acc + mov.valor;
+      if (mov.tipo === 'saque' || mov.tipo === 'aposta' || mov.tipo === 'perda') return acc - mov.valor;
       return acc;
     }, 0);
     res.json({ casaId, saldo });
