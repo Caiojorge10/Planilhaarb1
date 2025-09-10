@@ -388,16 +388,23 @@ app.post('/api/arbitragens/:id/finalizar', async (req, res) => {
     // Criar movimentação de prêmio para cada casa vencedora
     for (const premio of premios) {
       if (premio.casaId && premio.valor > 0) {
-      await prisma.movimentacao.create({
-        data: {
-            casaId: premio.casaId,
-          tipo: 'premio',
-            valor: premio.valor,
-            observacao: `Prêmio arbitragem #${arbitragem.id} (${premio.lado})`,
-          usuarioId: getUserId(req)
+        try {
+          console.log(`Criando movimentação de prêmio: casaId=${premio.casaId}, valor=${premio.valor}, lado=${premio.lado}`);
+          await prisma.movimentacao.create({
+            data: {
+              casaId: premio.casaId,
+              tipo: 'premio',
+              valor: premio.valor,
+              observacao: `Prêmio arbitragem #${arbitragem.id} (${premio.lado})`,
+              usuarioId: getUserId(req)
+            }
+          });
+          console.log(`Movimentação de prêmio criada com sucesso para casa ${premio.casaId}`);
+        } catch (error) {
+          console.error(`Erro ao criar movimentação de prêmio para casa ${premio.casaId}:`, error);
+          throw error;
         }
-      });
-    }
+      }
     }
     res.json({
       arbitragem: arbitragemAtualizada
