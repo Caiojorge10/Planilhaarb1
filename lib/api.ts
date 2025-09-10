@@ -196,10 +196,10 @@ export const arbitragensAPI = {
   },
 
   async finalizar(id: number, ladoVencedor: string) {
-    const res = await fetch(`${API_BASE_URL}/arbitragens/${id}/finalizar`, {
+    const res = await fetch(`${API_BASE_URL}/arbitragens/finalizar`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
-      body: JSON.stringify({ ladoVencedor })
+      body: JSON.stringify({ id, ladoVencedor })
     });
     if (!res.ok) throw await res.json();
     return res.json();
