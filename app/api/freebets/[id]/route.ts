@@ -5,7 +5,7 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url);
     const id = url.pathname.split('/').pop();
     
-    const response = await fetch(`https://planilhaarb1.onrender.com/api/movimentacoes/${id}`, {
+    const response = await fetch(`https://planilhaarb1.onrender.com/api/freebets/${id}`, {
       method: 'GET',
       headers: {
         'Authorization': request.headers.get('Authorization') || '',
@@ -25,7 +25,7 @@ export async function PUT(request: NextRequest) {
     const url = new URL(request.url);
     const id = url.pathname.split('/').pop();
     
-    const response = await fetch(`https://planilhaarb1.onrender.com/api/movimentacoes/${id}`, {
+    const response = await fetch(`https://planilhaarb1.onrender.com/api/freebets/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'ID inválido' }, { status: 400 });
     }
     
-    const response = await fetch(`https://planilhaarb1.onrender.com/api/movimentacoes/${id}`, {
+    const response = await fetch(`https://planilhaarb1.onrender.com/api/freebets/${id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': request.headers.get('Authorization') || '',
