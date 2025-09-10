@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   try {
-    const response = await fetch('https://planilharb1.onrender.com/api/health', {
+    const response = await fetch('https://planilhaarb1.onrender.com/api/health', {
       method: 'GET',
     });
 
