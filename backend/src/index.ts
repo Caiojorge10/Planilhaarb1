@@ -249,31 +249,37 @@ app.post('/api/arbitragens/:id/finalizar', async (req, res) => {
       (arbitragem.stake3 && !arbitragem.freebet3 ? arbitragem.stake3 : 0) +
       (arbitragem.stake4 && !arbitragem.freebet4 ? arbitragem.stake4 : 0) +
       (arbitragem.stake5 && !arbitragem.freebet5 ? arbitragem.stake5 : 0);
-    // Calcule o lucro real somando todos os lados vencedores
+    // Calcule o lucro real e os prêmios
     let lucroReal = 0;
     const premios: { casaId: number, valor: number, lado: string }[] = [];
+    
+    // Primeiro, calcular todos os prêmios
     lados.forEach((lado: string) => {
       if (lado === 'casa1' && arbitragem.stake1 && arbitragem.odd1 && arbitragem.casa1Id) {
-        lucroReal += (arbitragem.stake1 * arbitragem.odd1) - valorTotalInvestir;
-        premios.push({ casaId: arbitragem.casa1Id, valor: arbitragem.stake1 * arbitragem.odd1, lado });
+        const premio = arbitragem.stake1 * arbitragem.odd1;
+        premios.push({ casaId: arbitragem.casa1Id, valor: premio, lado });
       }
       if (lado === 'casa2' && arbitragem.stake2 && arbitragem.odd2 && arbitragem.casa2Id) {
-        lucroReal += (arbitragem.stake2 * arbitragem.odd2) - valorTotalInvestir;
-        premios.push({ casaId: arbitragem.casa2Id, valor: arbitragem.stake2 * arbitragem.odd2, lado });
+        const premio = arbitragem.stake2 * arbitragem.odd2;
+        premios.push({ casaId: arbitragem.casa2Id, valor: premio, lado });
       }
       if (lado === 'casa3' && arbitragem.stake3 && arbitragem.odd3 && arbitragem.casa3Id) {
-        lucroReal += (arbitragem.stake3 * arbitragem.odd3) - valorTotalInvestir;
-        premios.push({ casaId: arbitragem.casa3Id, valor: arbitragem.stake3 * arbitragem.odd3, lado });
+        const premio = arbitragem.stake3 * arbitragem.odd3;
+        premios.push({ casaId: arbitragem.casa3Id, valor: premio, lado });
       }
       if (lado === 'casa4' && arbitragem.stake4 && arbitragem.odd4 && arbitragem.casa4Id) {
-        lucroReal += (arbitragem.stake4 * arbitragem.odd4) - valorTotalInvestir;
-        premios.push({ casaId: arbitragem.casa4Id, valor: arbitragem.stake4 * arbitragem.odd4, lado });
+        const premio = arbitragem.stake4 * arbitragem.odd4;
+        premios.push({ casaId: arbitragem.casa4Id, valor: premio, lado });
       }
       if (lado === 'casa5' && arbitragem.stake5 && arbitragem.odd5 && arbitragem.casa5Id) {
-        lucroReal += (arbitragem.stake5 * arbitragem.odd5) - valorTotalInvestir;
-        premios.push({ casaId: arbitragem.casa5Id, valor: arbitragem.stake5 * arbitragem.odd5, lado });
+        const premio = arbitragem.stake5 * arbitragem.odd5;
+        premios.push({ casaId: arbitragem.casa5Id, valor: premio, lado });
       }
     });
+    
+    // Calcular lucro total: soma dos prêmios - valor total investido
+    const totalPremios = premios.reduce((sum, p) => sum + p.valor, 0);
+    lucroReal = totalPremios - valorTotalInvestir;
     // Atualizar arbitragem com lados vencedores, status, lucroEsperado e valorTotalInvestir
     const arbitragemAtualizada = await prisma.arbitragem.update({
       where: { id: arbitragemId },
@@ -517,8 +523,8 @@ app.get('/api/casas/:id/saldo', async (req, res) => {
     // Saldo apenas pelas movimentações
     const movimentacoes = await prisma.movimentacao.findMany({ where: { casaId } });
     const saldo = movimentacoes.reduce((acc, mov) => {
-      if (mov.tipo === 'deposito' || mov.tipo === 'premio' || mov.tipo === 'ganho') return acc + mov.valor;
-      if (mov.tipo === 'saque' || mov.tipo === 'aposta' || mov.tipo === 'perda') return acc - mov.valor;
+      if (mov.tipo === 'deposito' || mov.tipo === 'ganho') return acc + mov.valor;
+      if (mov.tipo === 'saque' || mov.tipo === 'aposta' || mov.tipo === 'perda' || mov.tipo === 'premio') return acc - mov.valor;
       return acc;
     }, 0);
     res.json({ casaId, saldo });
