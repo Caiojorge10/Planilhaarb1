@@ -99,7 +99,7 @@ export default function MovimentacoesPage() {
     async function fetchSaldos() {
       const saldosData = await Promise.all(
         casas.map(async (casa) => {
-          const response = await fetch(`http://localhost:3000/api/casas/${casa.id}/saldo`, {
+          const response = await fetch(`/api/casas/${casa.id}/saldo`, {
             headers: { 'Authorization': `Bearer ${token}` }
           });
           const saldo = await response.json();
@@ -117,7 +117,7 @@ export default function MovimentacoesPage() {
       const dataToSend = { ...formData }
       delete dataToSend.casaSearch
       if (editingMovimentacao) {
-        await fetch(`http://localhost:3000/api/movimentacoes/${editingMovimentacao.id}`, {
+        await fetch(`/api/movimentacoes/${editingMovimentacao.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -240,7 +240,7 @@ export default function MovimentacoesPage() {
     if (selecionadas.length === 0) return
     if (!confirm('Tem certeza que deseja excluir as movimentações selecionadas?')) return
     try {
-      await fetch('http://localhost:3000/api/movimentacoes/batch', {
+      await fetch('/api/movimentacoes/batch', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ids: selecionadas })
