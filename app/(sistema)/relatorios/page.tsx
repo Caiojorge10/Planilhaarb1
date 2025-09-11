@@ -204,62 +204,64 @@ export default function RelatoriosPage() {
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Resumo Executivo - Lucro Mensal</h1>
       </div>
 
-      {/* Resumo Executivo - Cards principais com cores de fundo */}
+      {/* Resumo Executivo - Dentro de uma caixa */}
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Resumo Executivo - Lucro Mensal</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-          <div className="bg-green-50 border-2 border-green-200 rounded-lg p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">Lucro Total</p>
-                <p className="text-2xl font-bold text-green-600">
-                  R$ {resumo.totalLucro.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                </p>
-              </div>
-              <div className="p-3 bg-green-100 rounded-full">
-                <DollarSign className="h-6 w-6 text-green-600" />
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">Média Mensal</p>
-                <p className="text-2xl font-bold text-blue-600">
-                  R$ {resumo.mediaMensal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                </p>
-              </div>
-              <div className="p-3 bg-blue-100 rounded-full">
-                <TrendingUp className="h-6 w-6 text-blue-600" />
+        <div className="bg-white border border-gray-200 rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Resumo Executivo - Lucro Mensal</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <div className="bg-green-50 border-2 border-green-200 rounded-lg p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-gray-600">Lucro Total</p>
+                  <p className="text-2xl font-bold text-green-600">
+                    R$ {resumo.totalLucro.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                  </p>
+                </div>
+                <div className="p-3 bg-green-100 rounded-full">
+                  <DollarSign className="h-6 w-6 text-green-600" />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="bg-purple-50 border-2 border-purple-200 rounded-lg p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">Melhor Mês</p>
-                <p className="text-2xl font-bold text-purple-600">
-                  R$ {resumo.melhorMes.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                </p>
-              </div>
-              <div className="p-3 bg-purple-100 rounded-full">
-                <Target className="h-6 w-6 text-purple-600" />
+            <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-gray-600">Média Mensal</p>
+                  <p className="text-2xl font-bold text-blue-600">
+                    R$ {resumo.mediaMensal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                  </p>
+                </div>
+                <div className="p-3 bg-blue-100 rounded-full">
+                  <TrendingUp className="h-6 w-6 text-blue-600" />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-6">
-            <div className="flex items-center justify-between">
+            <div className="bg-purple-50 border-2 border-purple-200 rounded-lg p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-gray-600">Melhor Mês</p>
+                  <p className="text-2xl font-bold text-purple-600">
+                    R$ {resumo.melhorMes.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                  </p>
+                </div>
+                <div className="p-3 bg-purple-100 rounded-full">
+                  <Target className="h-6 w-6 text-purple-600" />
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-6">
+              <div className="flex items-center justify-between">
         <div>
-                <p className="text-sm font-medium text-gray-600">Pior Mês</p>
-                <p className="text-2xl font-bold text-orange-600">
-                  R$ {resumo.piorMes.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                </p>
-              </div>
-              <div className="p-3 bg-orange-100 rounded-full">
-                <BarChart3 className="h-6 w-6 text-orange-600" />
+                  <p className="text-sm font-medium text-gray-600">Pior Mês</p>
+                  <p className="text-2xl font-bold text-orange-600">
+                    R$ {resumo.piorMes.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                  </p>
+                </div>
+                <div className="p-3 bg-orange-100 rounded-full">
+                  <BarChart3 className="h-6 w-6 text-orange-600" />
+                </div>
               </div>
             </div>
         </div>
@@ -290,7 +292,7 @@ export default function RelatoriosPage() {
             </div>
             <div className="p-2 bg-blue-100 rounded-full">
               <Calculator className="h-5 w-5 text-blue-600" />
-          </div>
+            </div>
           </div>
         </div>
 
@@ -334,44 +336,44 @@ export default function RelatoriosPage() {
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">{mes.mes}</h3>
                   <div className="text-2xl font-bold text-green-600 mb-4">
                     R$ {mes.lucro.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                  </div>
-                </div>
-                
+          </div>
+        </div>
+
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">Arbitragens:</span>
                     <span className="text-sm font-medium text-gray-900">{mes.arbitragens}</span>
-                  </div>
+          </div>
                   
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">Freebets:</span>
                     <span className="text-sm font-medium text-gray-900">
                       R$ {mes.freebets.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                     </span>
-                  </div>
+        </div>
                   
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">Ganhos:</span>
                     <span className="text-sm font-medium text-green-600">
                       R$ {mes.ganhos.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                     </span>
-                  </div>
-                  
+      </div>
+
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">Freespins:</span>
                     <span className="text-sm font-medium text-purple-600">
                       R$ {mes.freespins.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                     </span>
-                  </div>
-                  
+        </div>
+
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">Perdas:</span>
                     <span className="text-sm font-medium text-red-600">
                       R$ {mes.perdas.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                     </span>
-                  </div>
-                </div>
-              </div>
+          </div>
+        </div>
+      </div>
             ))}
           </div>
         </div>
