@@ -84,6 +84,16 @@ export default function RelatoriosPage() {
       // Calcular lucro baseado no lucroReal ou lucroEsperado
       const lucroArbitragem = arb.lucroReal || arb.lucroEsperado || 0
       meses[chave].lucro += lucroArbitragem
+      
+      // Calcular freebets baseado nas caixinhas marcadas
+      let valorFreebets = 0
+      if (arb.freebet1 && arb.stake1) valorFreebets += arb.stake1
+      if (arb.freebet2 && arb.stake2) valorFreebets += arb.stake2
+      if (arb.freebet3 && arb.stake3) valorFreebets += arb.stake3
+      if (arb.freebet4 && arb.stake4) valorFreebets += arb.stake4
+      if (arb.freebet5 && arb.stake5) valorFreebets += arb.stake5
+      
+      meses[chave].freebets += valorFreebets
     })
 
     // Processar ganhos
