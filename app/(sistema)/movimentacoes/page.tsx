@@ -210,7 +210,7 @@ export default function MovimentacoesPage() {
     : []
 
   const totalDepositos = Array.isArray(movimentacoes)
-    ? movimentacoes.filter(m => m.tipo === 'deposito' || m.tipo === 'premio' || m.tipo === 'ganho').reduce((sum, m) => sum + m.valor, 0)
+    ? movimentacoes.filter(m => m.tipo === 'deposito').reduce((sum, m) => sum + m.valor, 0)
     : 0;
 
   const totalSaques = Array.isArray(movimentacoes)
