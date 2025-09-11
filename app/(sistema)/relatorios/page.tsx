@@ -45,6 +45,11 @@ export default function RelatoriosPage() {
 
         // Processar dados mensais
         const dadosProcessados = processarDadosMensais(arbitragens, ganhos, perdas, freespins)
+        console.log('Dados processados:', dadosProcessados)
+        console.log('Arbitragens:', arbitragens)
+        console.log('Ganhos:', ganhos)
+        console.log('Perdas:', perdas)
+        console.log('Freespins:', freespins)
         setDadosMensais(dadosProcessados)
       } catch (error) {
         console.error('Erro ao carregar dados:', error)
@@ -76,9 +81,9 @@ export default function RelatoriosPage() {
       }
       
       meses[chave].arbitragens += 1
-      if (arb.lucroReal) {
-        meses[chave].lucro += arb.lucroReal
-      }
+      // Calcular lucro baseado no lucroReal ou lucroEsperado
+      const lucroArbitragem = arb.lucroReal || arb.lucroEsperado || 0
+      meses[chave].lucro += lucroArbitragem
     })
 
     // Processar ganhos
@@ -203,7 +208,7 @@ export default function RelatoriosPage() {
             <div>
               <p className="text-sm font-medium text-gray-600">Lucro Total</p>
               <p className="text-2xl font-bold text-green-600">
-                R$ {resumo.totalLucro.toLocaleString('pt-BR', { minimumFractionDigits: 3 })}
+                R$ {resumo.totalLucro.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
               </p>
             </div>
             <div className="p-3 bg-green-100 rounded-full">
@@ -217,7 +222,7 @@ export default function RelatoriosPage() {
             <div>
               <p className="text-sm font-medium text-gray-600">Média Mensal</p>
               <p className="text-2xl font-bold text-blue-600">
-                R$ {resumo.mediaMensal.toLocaleString('pt-BR', { minimumFractionDigits: 3 })}
+                R$ {resumo.mediaMensal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
               </p>
             </div>
             <div className="p-3 bg-blue-100 rounded-full">
@@ -231,7 +236,7 @@ export default function RelatoriosPage() {
             <div>
               <p className="text-sm font-medium text-gray-600">Melhor Mês</p>
               <p className="text-2xl font-bold text-purple-600">
-                R$ {resumo.melhorMes.toLocaleString('pt-BR', { minimumFractionDigits: 3 })}
+                R$ {resumo.melhorMes.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
               </p>
             </div>
             <div className="p-3 bg-purple-100 rounded-full">
@@ -245,7 +250,7 @@ export default function RelatoriosPage() {
             <div>
               <p className="text-sm font-medium text-gray-600">Pior Mês</p>
               <p className="text-2xl font-bold text-orange-600">
-                R$ {resumo.piorMes.toLocaleString('pt-BR', { minimumFractionDigits: 3 })}
+                R$ {resumo.piorMes.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
               </p>
             </div>
             <div className="p-3 bg-orange-100 rounded-full">
@@ -262,7 +267,7 @@ export default function RelatoriosPage() {
             <div>
               <p className="text-sm font-medium text-gray-600">Lucro Total</p>
               <p className="text-xl font-bold text-green-600">
-                R$ {resumo.totalLucro.toLocaleString('pt-BR', { minimumFractionDigits: 3 })}
+                R$ {resumo.totalLucro.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
               </p>
             </div>
             <div className="p-2 bg-green-100 rounded-full">
@@ -302,7 +307,7 @@ export default function RelatoriosPage() {
             <div>
               <p className="text-sm font-medium text-gray-600">Média Mensal</p>
               <p className="text-xl font-bold text-orange-600">
-                R$ {resumo.mediaMensal.toLocaleString('pt-BR', { minimumFractionDigits: 3 })}
+                R$ {resumo.mediaMensal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
               </p>
             </div>
             <div className="p-2 bg-orange-100 rounded-full">
@@ -321,7 +326,7 @@ export default function RelatoriosPage() {
               <div className="mb-4">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">{mes.mes}</h3>
                 <div className="text-2xl font-bold text-green-600 mb-4">
-                  R$ {mes.lucro.toLocaleString('pt-BR', { minimumFractionDigits: 3 })}
+                  R$ {mes.lucro.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
           </div>
         </div>
 
