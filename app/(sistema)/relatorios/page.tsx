@@ -50,6 +50,11 @@ export default function RelatoriosPage() {
         console.log('Ganhos:', ganhos)
         console.log('Perdas:', perdas)
         console.log('Freespins:', freespins)
+        
+        // Log específico para freebets
+        const totalFreebets = dadosProcessados.reduce((sum, mes) => sum + mes.freebets, 0)
+        console.log('Total de freebets calculado:', totalFreebets)
+        
         setDadosMensais(dadosProcessados)
       } catch (error) {
         console.error('Erro ao carregar dados:', error)
@@ -92,6 +97,7 @@ export default function RelatoriosPage() {
       if (temFreebet && arb.lucroReal) {
         // Se a arbitragem usou freebet e tem lucro real, adiciona o lucro real
         lucroFreebets = arb.lucroReal
+        console.log(`Arbitragem ${arb.id} com freebet: lucroReal=${arb.lucroReal}, freebets=${arb.freebet1},${arb.freebet2},${arb.freebet3},${arb.freebet4},${arb.freebet5}`)
       }
       
       meses[chave].freebets += lucroFreebets
