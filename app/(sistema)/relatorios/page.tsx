@@ -146,8 +146,16 @@ export default function RelatoriosPage() {
 
     // Ordenar por data
     return Object.values(meses).sort((a, b) => {
-      const dataA = new Date(a.mes.split(' de ')[1], ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'].indexOf(a.mes.split(' de ')[0]))
-      const dataB = new Date(b.mes.split(' de ')[1], ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'].indexOf(b.mes.split(' de ')[0]))
+      const [mesA, anoA] = a.mes.split(' de ')
+      const [mesB, anoB] = b.mes.split(' de ')
+      
+      const mesesIndex = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
+      const indiceMesA = mesesIndex.indexOf(mesA)
+      const indiceMesB = mesesIndex.indexOf(mesB)
+      
+      const dataA = new Date(parseInt(anoA), indiceMesA)
+      const dataB = new Date(parseInt(anoB), indiceMesB)
+      
       return dataA.getTime() - dataB.getTime()
     })
   }
@@ -271,7 +279,7 @@ export default function RelatoriosPage() {
             </div>
             <div className="p-2 bg-blue-100 rounded-full">
               <Calculator className="h-5 w-5 text-blue-600" />
-            </div>
+          </div>
         </div>
       </div>
 
